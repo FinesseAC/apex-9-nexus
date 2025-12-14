@@ -127,7 +127,7 @@ interface AppState {
   setGlobalFiles: (files: GlobalFile[]) => void;
   removeGlobalFile: (index: number) => void;
   history: HistoryItem[];
-  addToHistory: (item: Omit<HistoryIconItem, 'id' | 'timestamp'>) => void;
+  addToHistory: (item: Omit<HistoryItem, 'id' | 'timestamp'>) => void;
   clearHistory: () => void;
   removeHistoryItem: (id: string) => void;
   toggleFavorite: (id: string) => void;
