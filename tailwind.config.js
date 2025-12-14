@@ -20,5 +20,5 @@ export default {
       }
     },
   },
-  plugi nsrequire('@tailwindcss/typography')][],
+  plugins: [require('@tailwindcss/typography')],
 }
