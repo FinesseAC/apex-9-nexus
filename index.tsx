@@ -1,4 +1,3 @@
-
 /**
  * @license
  * SPDX-License-Identifier: Apache-2.0
@@ -12,17 +11,15 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 import {
-  ShieldCheck, Library, BrainCircuit, Sparkles, Film,
-  Send, Upload, Loader2, FileText, Trash2,
-  Copy, CheckCircle2, X, History, Download, RefreshCw, LayoutTemplate,
-  HelpCircle, Keyboard, Info, AlertCircle, BarChart3, Globe, Layers,
-  Square, Sliders, GitBranch, XCircle, Zap, Search,
-  Star, SplitSquareHorizontal, Radio, Activity, Mic, MicOff, Video, VideoOff,
+  ShieldCheck, BrainCircuit, Sparkles,
+  Send, Upload, Loader2, Trash2,
+  X, Download,
+  XCircle, Radio, Activity, Mic, MicOff, Video, VideoOff,
   ChevronLeft, ChevronRight
 } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
 import { GoogleGenAI, Type, HarmCategory, HarmBlockThreshold, LiveServerMessage, Modality } from '@google/genai';
-import { set, get, del } from 'idb-keyval';
+import { set as idbSet, get, del } from 'idb-keyval';
 
 // --- Utils ---
 function cn(...inputs: ClassValue[]) {
@@ -171,7 +168,7 @@ const useStore = create<AppState>()(
                     if (m.url.startsWith('data:')) {
                         const blobKey = `media_${id}_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
                         try {
-                            await set(blobKey, m.url);
+                            await idbSet(blobKey, m.url);
                             return { ...m, url: `idb://${blobKey}` }; 
                         } catch (e) {
                             console.error("IDB Write Failed", e);
@@ -743,4 +740,3 @@ const App = () => {
 
 const root = createRoot(document.getElementById('root')!);
 root.render(<App />);
-    
