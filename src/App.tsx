@@ -20,7 +20,6 @@ import {
 } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
 import { GoogleGenAI, Type, HarmCategory, HarmBlockThreshold, LiveServerMessage, Modality } from '@google/genai';
-import { set as idbSet, get, del } from 'idb-keyval';
 
 // --- Utils ---
 function cn(...inputs: ClassValue[]) {
