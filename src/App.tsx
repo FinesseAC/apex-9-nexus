@@ -1,4 +1,4 @@
-/**
+/**, Square, Copy, Download
  * @license SPDX-License-Identifier: Apache-2.0
  * APEX-9 NEXUS - Elite Multimodal AI Orchestration Platform
  */
@@ -127,7 +127,7 @@ interface AppState {
   setGlobalFiles: (files: GlobalFile[]) => void;
   removeGlobalFile: (index: number) => void;
   history: HistoryItem[];
-  addToHistory: (item: Omit<HistoryItem, 'id' | 'timestamp'>) => void;
+  addToHistory: (item: Omit<HistoryIconItem, 'id' | 'timestamp'>) => void;
   clearHistory: () => void;
   removeHistoryItem: (id: string) => void;
   toggleFavorite: (id: string) => void;
@@ -425,7 +425,7 @@ const HistorySidebar = () => {
           <motion.div initial={{ x: '-100%' }} animate={{ x: 0 }} exit={{ x: '-100%' }} transition={{ type: 'spring', damping: 25 }} 
             className="fixed top-0 left-0 bottom-0 w-80 bg-slate-950 border-r border-slate-800 z-50 flex flex-col shadow-2xl">
             <div className="p-4 border-b border-slate-800 flex justify-between items-center">
-              <h2 className="font-bold flex items-center gap-2"><HistoryIcon size={18} className="text-blue-400"/> History</h2>
+              <h2 className="font-bold flex items-center gap-2"><HistoryIconIcon size={18} className="text-blue-400"/> History</h2>
               <button onClick={() => setHistoryOpen(false)}><X size={18} className="text-slate-500 hover:text-white"/></button>
             </div>
             <div className="p-4 border-b border-slate-800">
@@ -888,7 +888,7 @@ const App = () => {
         <div className="flex h-screen w-screen bg-slate-950 text-slate-200">
           <ToastContainer />
           <ShortcutsModal />
-          <HistorySidebar />
+          <HistoryIconSidebar />
           {!apiKey && <ApiKeyModal />}
 
           {/* Sidebar */}
@@ -920,7 +920,7 @@ const App = () => {
 
             <div className="p-4 border-t border-slate-800 space-y-2">
               <button onClick={() => setHistoryOpen(true)} className="w-full flex items-center gap-2 px-4 py-2 text-sm text-slate-500 hover:text-white hover:bg-slate-800/50 rounded-lg transition-colors">
-                <History size={16} /> History
+                <HistoryIcon size={16} /> History
               </button>
               <button onClick={() => setShortcutsOpen(true)} className="w-full flex items-center gap-2 px-4 py-2 text-sm text-slate-500 hover:text-white hover:bg-slate-800/50 rounded-lg transition-colors">
                 <HelpCircle size={16} /> Help
