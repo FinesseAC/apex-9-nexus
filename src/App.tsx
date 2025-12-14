@@ -348,7 +348,7 @@ const CreatorEngine = () => {
             const result = await ai.models.generateContent({
                 model: MODELS.IMAGE_GEN,
                 contents: { parts: [{ text: input }] },
-                config: { imageConfig: { aspectRatio: "16:9", imageSize: "1K" } }
+//                 config: { imageConfig: { aspectRatio: "16:9", imageSize: "1K" } }
             });
             // Extract image parts
             const images = result.candidates?.[0]?.content?.parts?.filter(p => p.inlineData).map(p => ({
