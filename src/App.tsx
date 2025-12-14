@@ -216,10 +216,10 @@ const useStore = create<AppState>()(
 // Helper to hydrate IDB images
 const hydrateMedia = async (url: string): Promise<string> => {
     if (url.startsWith('idb://')) {
-        const key = url.replace('idb://', '');
+//         const key = url.replace('idb://', '');
         try {
 //             const data = await get(key);
-            return data || '';
+//             return data || '';
         } catch (e) {
             console.error("IDB Read Failed", e);
             return '';
