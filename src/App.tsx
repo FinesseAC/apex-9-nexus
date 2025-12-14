@@ -154,11 +154,11 @@ interface AppState {
 
 const useStore = create<AppState>()(
     persist(
-        (set, getState) => ({
+        (set,) => ({
             activeEngine: EngineId.ANALYST,
             setActiveEngine: (id) => set({ activeEngine: id }),
             
-            apiKey: process.env.API_KEY,
+            apiKey: import.meta.env.VITE_API_KEY || '',
             
             history: [],
             addToHistory: async (item) => {
@@ -168,8 +168,8 @@ const useStore = create<AppState>()(
                     if (m.url.startsWith('data:')) {
                         const blobKey = `media_${id}_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
                         try {
-                            await idbSet(blobKey, m.url);
-                            return { ...m, url: `idb://${blobKey}` }; 
+//                             await idbSet(blobKey, m.url);
+//                             return { ...m, url: `idb://${blobKey}` }; 
                         } catch (e) {
                             console.error("IDB Write Failed", e);
                             return m; // Fallback to storing in state if IDB fails (risk of quota)
