@@ -11,12 +11,8 @@ import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 import { 
   ShieldCheck, Library, BrainCircuit, Sparkles, Film, 
-  Send, Upload, Loader2, AlertTriangle, FileText, Trash2, 
-  Copy, CheckCircle2, X, History, Download, RefreshCw, LayoutTemplate,
-  HelpCircle, Keyboard, Info, AlertCircle, BarChart3, Globe, Layers,
-  Square, Sliders, Plus, XCircle, Zap, Search,
-  ArrowRight, Star, FileAudio, Video
-} from 'lucide-react';
+  Send, Upload, Loader2, FileText, Trash2,  HelpCircle, Keyboard, Info, AlertCircle, BarChart3, Globe, Layers,
+  HelpCircle, Keyboard, Info, AlertCircle, BarChart3, Globe, Layers,} from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
 import { GoogleGenAI, Type, HarmCategory, HarmBlockThreshold } from '@google/genai';
 
