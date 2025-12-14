@@ -11,7 +11,7 @@ import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 import { 
   ShieldCheck, Library, BrainCircuit, Sparkles, Film, 
-  Send, Upload, Loader2, FileText, Trash2,  HelpCircle, Keyboard, Info, AlertCircle, BarChart3, Globe, Layers, X, Search, RefreshCw, Star, XCircle, Video, FileAudio, Zap, CheckCircle2, Sliders
+  Send, Upload, Loader2, FileText, Trash2,  HelpCircle, Keyboard, Info, AlertCircle, BarChart3, Globe, Layers, X, Search, RefreshCw, Star, XCircle, Video, FileAudio, Zap, CheckCircle2, Sliders, History as HistoryIcon
    } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
 import { GoogleGenAI, Type, HarmCategory, HarmBlockThreshold } from '@google/genai';
@@ -425,7 +425,7 @@ const HistorySidebar = () => {
           <motion.div initial={{ x: '-100%' }} animate={{ x: 0 }} exit={{ x: '-100%' }} transition={{ type: 'spring', damping: 25 }} 
             className="fixed top-0 left-0 bottom-0 w-80 bg-slate-950 border-r border-slate-800 z-50 flex flex-col shadow-2xl">
             <div className="p-4 border-b border-slate-800 flex justify-between items-center">
-              <h2 className="font-bold flex items-center gap-2"><History size={18} className="text-blue-400"/> History</h2>
+              <h2 className="font-bold flex items-center gap-2"><HistoryIcon size={18} className="text-blue-400"/> History</h2>
               <button onClick={() => setHistoryOpen(false)}><X size={18} className="text-slate-500 hover:text-white"/></button>
             </div>
             <div className="p-4 border-b border-slate-800">
