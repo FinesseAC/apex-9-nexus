@@ -10,9 +10,9 @@ import { QueryClient, QueryClientProvider, useMutation } from '@tanstack/react-q
 import { motion, AnimatePresence } from 'framer-motion';
 import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
-import { 
-  ShieldCheck, Library, BrainCircuit, Sparkles, Film, 
-  Send, Upload, Loader2, AlertTriangle, FileText, Trash2, 
+import {
+  ShieldCheck, Library, BrainCircuit, Sparkles, Film,
+  Send, Upload, Loader2, AlertTriangle, FileText, Trash2,
   Copy, CheckCircle2, X, History, Download, RefreshCw, LayoutTemplate,
   HelpCircle, Keyboard, Info, AlertCircle, BarChart3, Globe, Layers,
   Square, Sliders, GitBranch, Plus, XCircle, Zap, Search,
@@ -57,14 +57,14 @@ const SCHEMAS = {
     type: Type.OBJECT,
     properties: {
       answer: { type: Type.STRING, description: "Direct answer in markdown." },
-      sources: { 
-        type: Type.ARRAY, 
-        items: { 
-          type: Type.OBJECT, 
+      sources: {
+        type: Type.ARRAY,
+        items: {
+          type: Type.OBJECT,
           properties: {
             title: { type: Type.STRING },
             uri: { type: Type.STRING }
-          } 
+          }
         }
       },
       confidence: { type: Type.NUMBER },
@@ -143,39 +143,39 @@ interface AppState {
   setTemplatesOpen: (open: boolean) => void;
   isFirstVisit: boolean;
   completeOnboarding: () => void;
-  
+
   // Global Input State
   globalInput: string;
   setGlobalInput: (s: string) => void;
   globalFile: { base64: string; mimeType: string; preview: string; fileObj: File } | null;
   setGlobalFile: (f: { base64: string; mimeType: string; preview: string; fileObj: File } | null) => void;
-  
+
   // Data
   history: HistoryItem[];
   addToHistory: (item: Omit<HistoryItem, 'id' | 'timestamp'>) => void;
   clearHistory: () => void;
   removeHistoryItem: (id: string) => void;
   toggleFavorite: (id: string) => void;
-  
+
   collections: Collection[];
   addCollection: (name: string) => void;
   addToCollection: (itemId: string, collectionId: string) => void;
-  
+
   templates: Template[];
   addTemplate: (t: Omit<Template, 'id'>) => void;
   removeTemplate: (id: string) => void;
-  
+
   // Features
   compareMode: boolean;
   toggleCompareMode: () => void;
-  compareSelection: string[]; 
+  compareSelection: string[];
   toggleCompareSelection: (id: string) => void;
-  
+
   // Settings
   apiKey: string | undefined;
   advancedParams: AdvancedParams;
   setAdvancedParams: (p: Partial<AdvancedParams>) => void;
-  
+
   // Notifications
   toasts: Toast[];
   addToast: (message: string, type?: Toast['type']) => void;
@@ -197,22 +197,22 @@ const useStore = create<AppState>()(
       setTemplatesOpen: (open) => set({ isTemplatesOpen: open }),
       isFirstVisit: true,
       completeOnboarding: () => set({ isFirstVisit: false }),
-      
+
       globalInput: '',
       setGlobalInput: (s) => set({ globalInput: s }),
       globalFile: null,
       setGlobalFile: (f) => set({ globalFile: f }),
-      
+
       history: [],
-      addToHistory: (item) => set((state) => ({ 
-        history: [{ ...item, id: crypto.randomUUID(), timestamp: Date.now() }, ...state.history] 
+      addToHistory: (item) => set((state) => ({
+        history: [{ ...item, id: crypto.randomUUID(), timestamp: Date.now() }, ...state.history]
       })),
       clearHistory: () => set({ history: [] }),
       removeHistoryItem: (id) => set((state) => ({ history: state.history.filter(i => i.id !== id) })),
       toggleFavorite: (id) => set((state) => ({
         history: state.history.map(h => h.id === id ? { ...h, favorite: !h.favorite } : h)
       })),
-      
+
       collections: [
         { id: 'c1', name: 'Research', color: 'bg-blue-500' },
         { id: 'c2', name: 'Creative', color: 'bg-purple-500' },
@@ -224,7 +224,7 @@ const useStore = create<AppState>()(
       addToCollection: (itemId, collectionId) => set((state) => ({
         history: state.history.map(h => h.id === itemId ? { ...h, collectionId } : h)
       })),
-      
+
       templates: [
         { id: 't1', name: 'UI Audit', description: 'Analyze UI accessibility and aesthetics', engine: 'analyst', prompt: 'Conduct a forensic UI/UX audit of this interface. Identify accessibility violations (WCAG 2.1), visual hierarchy flaws, and provide hex code corrections.', mode: 'audit' },
         { id: 't2', name: 'Tech Blog Post', description: 'Draft a technical article', engine: 'strategist', prompt: 'Write a technical blog post about [TOPIC]. Structure: Hook, Problem Statement, Technical Solution (with code blocks), Trade-offs, Conclusion.', mode: 'default' },
@@ -232,7 +232,7 @@ const useStore = create<AppState>()(
       ],
       addTemplate: (t) => set((state) => ({ templates: [...state.templates, { ...t, id: crypto.randomUUID() }] })),
       removeTemplate: (id) => set((state) => ({ templates: state.templates.filter(t => t.id !== id) })),
-      
+
       compareMode: false,
       toggleCompareMode: () => set((state) => ({ compareMode: !state.compareMode, compareSelection: [] })),
       compareSelection: [],
@@ -240,10 +240,10 @@ const useStore = create<AppState>()(
         if (state.compareSelection.includes(id)) {
           return { compareSelection: state.compareSelection.filter(s => s !== id) };
         }
-        if (state.compareSelection.length >= 2) return state; 
+        if (state.compareSelection.length >= 2) return state;
         return { compareSelection: [...state.compareSelection, id] };
       }),
-      
+
       apiKey: process.env.API_KEY,
       advancedParams: {
         temperature: 0.7,
@@ -253,7 +253,7 @@ const useStore = create<AppState>()(
         safety: 'standard'
       },
       setAdvancedParams: (p) => set((state) => ({ advancedParams: { ...state.advancedParams, ...p } })),
-      
+
       toasts: [],
       addToast: (message, type = 'info') => set((state) => {
         const id = crypto.randomUUID();
@@ -267,9 +267,9 @@ const useStore = create<AppState>()(
     {
       name: 'apex9-storage',
       storage: createJSONStorage(() => localStorage),
-      partialize: (state) => ({ 
-        history: state.history, 
-        templates: state.templates, 
+      partialize: (state) => ({
+        history: state.history,
+        templates: state.templates,
         collections: state.collections,
         advancedParams: state.advancedParams,
         isFirstVisit: state.isFirstVisit
@@ -315,13 +315,13 @@ const fileToBase64 = (file: File): Promise<string> => {
 };
 
 async function generateWithRetry(
-  ai: GoogleGenAI, 
-  model: string, 
-  params: any, 
+  ai: GoogleGenAI,
+  model: string,
+  params: any,
   retries = 2
 ): Promise<any> {
   const { incrementApiUsage, advancedParams } = useStore.getState();
-  
+
   // Offline Check
   if (!navigator.onLine) {
     throw new Error("Network offline. Please check your connection.");
@@ -351,7 +351,7 @@ async function generateWithRetry(
     try {
       incrementApiUsage();
       const response = await ai.models.generateContent({ model, ...finalParams });
-      
+
       if (params.config?.responseSchema) {
         try {
           const parsed = JSON.parse(response.text!);
@@ -373,7 +373,7 @@ async function generateWithRetry(
       }
       if (i === retries - 1) throw e;
       console.warn(`Attempt ${i + 1} failed: ${e.message}`);
-      await new Promise(r => setTimeout(r, 1000 * (i + 1))); 
+      await new Promise(r => setTimeout(r, 1000 * (i + 1)));
     }
   }
 }
@@ -381,8 +381,8 @@ async function generateWithRetry(
 // --- Components ---
 
 const SkipLink = () => (
-  <a 
-    href="#main-content" 
+  <a
+    href="#main-content"
     className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 z-[100] px-4 py-2 bg-primary text-white font-bold rounded shadow-xl"
   >
     Skip to Content
@@ -424,8 +424,8 @@ const AdvancedSettingsPanel = () => {
 
   return (
     <div className="relative z-20">
-      <button 
-        onClick={() => setIsOpen(!isOpen)} 
+      <button
+        onClick={() => setIsOpen(!isOpen)}
         aria-expanded={isOpen}
         className={cn("flex items-center gap-2 px-3 py-1.5 rounded text-xs font-bold uppercase border transition-all focus-visible:ring-2 focus-visible:ring-primary", isOpen ? "bg-primary/20 border-primary text-primary" : "bg-slate-900 border-slate-700 text-slate-500 hover:text-white")}
       >
@@ -466,7 +466,7 @@ const AdvancedSettingsPanel = () => {
 
 const TemplatesModal = () => {
   const { isTemplatesOpen, setTemplatesOpen, templates, setActiveEngine, setGlobalInput, addTemplate } = useStore();
-  
+
   if (!isTemplatesOpen) return null;
 
   return (
@@ -552,7 +552,7 @@ class EngineErrorBoundary extends Component<
   public state: { hasError: boolean; error?: Error } = { hasError: false, error: undefined };
 
   static getDerivedStateFromError(error: Error) { return { hasError: true, error }; }
-  
+
   render() {
     if (this.state.hasError) {
       return (
@@ -678,7 +678,7 @@ const AnalystEngine = React.memo(() => {
       </div>
       <textarea className="input-cyber w-full flex-1 resize-none min-h-[100px]" placeholder={`Enter context for ${mode} analysis...`} value={globalInput} onChange={e => setGlobalInput(e.target.value)} aria-label="Analysis Input" />
       <div onClick={() => fileInputRef.current?.click()} className={cn("border-2 border-dashed border-slate-800 rounded-lg p-6 flex flex-col items-center justify-center cursor-pointer transition-colors group relative overflow-hidden h-24 focus-within:ring-2 focus-within:ring-primary", globalFile ? "bg-slate-900 border-primary/50" : "hover:bg-slate-900/50 hover:border-slate-600")} role="button" tabIndex={0} onKeyDown={(e) => e.key === 'Enter' && fileInputRef.current?.click()}>
-        <input ref={fileInputRef} type="file" className="hidden" onChange={handleFile} accept="image/*,video/*,audio/*" />
+        <input ref={fileInputRef} multiple type="file" className="hidden" onChange={handleFile} accept="image/*,video/*,audio/*" />
         {globalFile ? <div className="flex items-center gap-2 text-primary z-10"><CheckCircle2 size={20} /><span className="text-xs font-mono truncate max-w-[200px]">{globalFile.fileObj.name}</span><button onClick={(e) => { e.stopPropagation(); setGlobalFile(null); }} className="p-1 hover:bg-slate-800 rounded-full" aria-label="Remove file"><X size={14}/></button></div> : <div className="text-center"><Upload className="mx-auto mb-1 text-slate-500 group-hover:text-primary" size={20} /><span className="text-[10px] font-bold text-slate-500 uppercase">Attach Evidence</span></div>}
       </div>
       <div className="flex justify-between items-center"><AdvancedSettingsPanel/><button onClick={() => mutation.mutate()} disabled={mutation.isPending} className="btn-primary w-1/2">{mutation.isPending ? <Loader2 className="animate-spin" /> : <Zap size={18} />} EXECUTE</button></div>
@@ -810,12 +810,12 @@ const AnimatorEngine = React.memo(() => {
 
 // --- Main App ---
 const App = () => {
-  const { 
-    activeEngine, setActiveEngine, history, compareMode, toggleCompareMode, 
-    compareSelection, toggleCompareSelection, removeHistoryItem, addToast, 
-    apiUsage, setShortcutsOpen, setHistoryOpen, setTemplatesOpen, setGlobalInput 
+  const {
+    activeEngine, setActiveEngine, history, compareMode, toggleCompareMode,
+    compareSelection, toggleCompareSelection, removeHistoryItem, addToast,
+    apiUsage, setShortcutsOpen, setHistoryOpen, setTemplatesOpen, setGlobalInput
   } = useStore();
-  
+
   const queryClient = new QueryClient();
 
   useEffect(() => {
@@ -834,7 +834,7 @@ const App = () => {
   }, []);
 
   const copyToClipboard = async (text: string) => {
-    try { await navigator.clipboard.writeText(text); addToast("Copied", 'success'); } 
+    try { await navigator.clipboard.writeText(text); addToast("Copied", 'success'); }
     catch { addToast("Copy failed", 'error'); }
   };
 
