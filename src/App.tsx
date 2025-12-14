@@ -11,7 +11,7 @@ import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 import { 
   ShieldCheck, Library, BrainCircuit, Sparkles, Film, 
-  Send, Upload, Loader2, FileText, Trash2,  HelpCircle, Keyboard, Info, AlertCircle, BarChart3, Globe, Layers
+  Send, Upload, Loader2, FileText, Trash2,  HelpCircle, Keyboard, Info, AlertCircle, BarChart3, Globe, Layers, X, Search, RefreshCw, Star, XCircle, Video, FileAudio, Zap
    } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
 import { GoogleGenAI, Type, HarmCategory, HarmBlockThreshold } from '@google/genai';
