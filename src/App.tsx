@@ -166,7 +166,7 @@ const useStore = create<AppState>()(
                 // Store heavy media in IDB, keep metadata in State to avoid LocalStorage quota limits
                 const mediaWithRefs = await Promise.all(item.media.map(async (m) => {
                     if (m.url.startsWith('data:')) {
-                        const blobKey = `media_${id}_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+                        // const blobKey = `media_${id}_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
                         try {
 //                             await idbSet(blobKey, m.url);
 //                             return { ...m, url: `idb://${blobKey}` }; 
@@ -218,7 +218,7 @@ const hydrateMedia = async (url: string): Promise<string> => {
     if (url.startsWith('idb://')) {
         const key = url.replace('idb://', '');
         try {
-            const data = await get(key);
+//             const data = await get(key);
             return data || '';
         } catch (e) {
             console.error("IDB Read Failed", e);
