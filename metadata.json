@@ -1,0 +1,7 @@
+{
+  "name": "APEX-9 NEXUS",
+  "description": "Elite AI Prompt & Generation Engine",
+  "requestFramePermissions": [
+    "microphone"
+  ]
+}
